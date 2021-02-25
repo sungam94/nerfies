@@ -1,0 +1,25 @@
+version: '3'
+services:
+  nerfies:
+    container_name: nerfies
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "/home/mk301/:/home/mk301"
+    ports:
+      - "8090:8080"
+    stdin_open: true
+    tty: true
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=0,1
+      - USER_GID="1016"
+      - WORKSPACE_HOME=/home/mk301/
+      - CONFIG_BACKUP_ENABLED=false      
+
+ # - SHELL=/bin/zsh
+ # - NB_USER="mk301"
+ # - CONDA_HOME=/home/mk301/miniconda3/"
+
+ # entrypoint: /bin/bash
