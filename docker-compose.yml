@@ -1,7 +1,7 @@
 version: '3'
 services:
-  nerfies:
-    container_name: nerfies_1
+  nerfies_1:
+    container_name: nerfies_8090
     build:
       context: .
       dockerfile: Dockerfile
@@ -14,6 +14,24 @@ services:
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=0,1
+      - USER_GID="1016"
+      - WORKSPACE_HOME=/workspace/
+      - CONFIG_BACKUP_ENABLED=false      
+
+  nerfies_2:
+    container_name: nerfies_8091
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "/home/mk301/:/workspace/"
+    ports:
+      - "8091:8080"
+    stdin_open: true
+    tty: true
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=2,3
       - USER_GID="1016"
       - WORKSPACE_HOME=/workspace/
       - CONFIG_BACKUP_ENABLED=false      

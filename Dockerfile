@@ -65,7 +65,7 @@ ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_P
 
 
 
-WORKDIR /workdir/
+WORKDIR /workspace/
 
   # Create the environment:
 COPY ./requirements.txt .
@@ -74,12 +74,14 @@ RUN apt-get update && apt-get install openexr libopenexr-dev colmap ffmpeg
 # Install jaxlib 10.2
 RUN pip install --upgrade jax jaxlib==0.1.59+cuda102 -f https://storage.googleapis.com/jax-releases/jax_releases.html
 
-# RUN pwd
 
-# RUN pip install -e git+file///nerfies/nerfies/#egg=nerfies
-# RUN pip install git+https://github.com/sungam94/nerfies.git
 
-# RUN pip install "git+https://github.com/google/nerfies.git#egg=pycolmap&subdirectory=third_party/pycolmap"
+
+# RUN pip install -e git+file///nerfies#egg=nerfies
+
+ 
+RUN pip install git+https://github.com/google/nerfies.git
+RUN pip install "git+https://github.com/google/nerfies.git#egg=pycolmap&subdirectory=third_party/pycolmap"
 
 RUN pip install numpy==1.19.3 mediapipe tensorflow_graphics  ipyplot nbdime imageio-ffmpeg 
 
